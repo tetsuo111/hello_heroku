@@ -5,7 +5,7 @@ require('../vendor/autoload.php');
 echo "hello world";
 
 
- $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+ $url = parse_url(getenv("mysql://b25c7548cad8b5:26989079@us-cdbr-iron-east-03.cleardb.net/heroku_3089e5be4c942aa?reconnect=true"));
 
     $server = $url["host"];
     $username = $url["user"];
