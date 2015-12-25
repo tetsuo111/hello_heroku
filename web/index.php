@@ -5,24 +5,19 @@ require('../vendor/autoload.php');
 echo "hello world";
 
 
-$conn = mysqli_connect('127.0.0.1' , 'root' , 'root');
+ $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-if($conn){
-  //データベースの選択
-  mysqli_select_db($conn , 'sample_db');
-  mysqli_query($conn , 'SET NAMES utf8');
-  //データベースから取り出しSQL文 1
-  $sql = 'SELECT message_id , message_title , message , user_name , entry_date FROM message_tb ORDER BY message_id';
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $db = substr($url["path"], 1);
 
-  //SQL文の実行
-  $query = mysqli_query($conn , $sql);
-}else{
-  echo "error";
-}
+    $link = mysqli_connect($server, $username, $password, $db);
+    $result = mysqli_query($link, "select * from user");
 
-
-e
-
+    while($user = mysqli_fetch_array($result)) {
+      echo $user['id'], " : ", $user['name'], "<br>";
+    }
 
 
 
